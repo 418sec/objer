@@ -12,6 +12,10 @@
 export function set(object, path, value) {
   let subObject = object;
   const keys = getObjectPath(path);
+ 
+  if(path.includes('__proto__') || path.includes('constructor') || path.includes('prototype')){
+    return object;
+  }
   if (keys.length === 0) return value; // We cannot modify the original value to be the new value no matter how hard we try
   for (let keydex = 0; keydex < keys.length; keydex += 1) {
     let key = keys[keydex];
